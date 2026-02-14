@@ -153,13 +153,14 @@ section {
 .modal-content {
   background: #fff;
   padding: 30px;
-  max-width: 500px;
-  max-height: 80vh; /* limit modal height */
+  width: 100%;
+  max-width: 500px;       /* fixed width */
+  max-height: 80vh;       /* fixed max height */
   border-radius: 20px;
   text-align: center;
-  overflow-y: auto; /* scroll for long text */
-  animation: pop .5s ease;
+  overflow-y: auto;       /* scroll inside box */
   word-wrap: break-word;
+  flex-shrink: 0;
 }
 
 .modal-content::-webkit-scrollbar {
