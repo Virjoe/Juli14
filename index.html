@@ -147,15 +147,27 @@ section {
   justify-content: center;
   align-items: center;
   z-index: 999;
+  padding: 20px;
 }
 
 .modal-content {
   background: #fff;
   padding: 30px;
   max-width: 500px;
+  max-height: 80vh; /* limit modal height */
   border-radius: 20px;
   text-align: center;
+  overflow-y: auto; /* scroll for long text */
   animation: pop .5s ease;
+  word-wrap: break-word;
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(230,57,70,0.5);
+  border-radius: 4px;
 }
 
 @keyframes pop {
@@ -233,7 +245,7 @@ Thank you for being the amazing person that you are, for making every day bright
       </div>
 
       <div class="card">
-        <img src="1..jpeg">
+        <img src="1.jpeg">
         <p>Laughing together.</p>
         <button class="view-btn" onclick="openModal('This is our first photo together, taken at Baywalk. We shared pizza and watched the sunset, savoring every moment. We went home late, soaked in the rain, because we didn’t want to be apart. That day, simple as it was, will always be one of my favorite memories with you.')">
           View That Day
@@ -251,7 +263,7 @@ Thank you for being the amazing person that you are, for making every day bright
       <div class="card">
         <img src="3.jpeg">
         <p>Moments that stay.</p>
-        <button class="view-btn" onclick="openModal('TThis photo was taken on my birthday, a day I honestly didn’t feel very happy. I was carrying so much sadness, but the moment I was with you, all of it seemed to melt away. You comforted me in ways only you could you held me close, hugged me tightly, and made me feel safe and loved. I was so thankful that you chose to celebrate my birthday with me, even when I didn’t feel like celebrating at all. The little mini cakes you brought were not just delicious they were a reminder of the thought and care you put into every detail. Every laugh we shared, every small moment we experienced that day, felt like a gift in itself. That day, more than anything, showed me your unconditional love, your patience, and your unwavering support. It’s a memory I will carry in my heart forever, a day that made me feel truly seen, cherished, and loved by you.')">
+        <button class="view-btn" onclick="openModal('This photo was taken on my birthday, a day I honestly didn’t feel very happy. I was carrying so much sadness, but the moment I was with you, all of it seemed to melt away. You comforted me in ways only you could; you held me close, hugged me tightly, and made me feel safe and loved. I was so thankful that you chose to celebrate my birthday with me, even when I didn’t feel like celebrating at all. The little mini cakes you brought were not just delicious, they were a reminder of the thought and care you put into every detail. Every laugh we shared, every small moment we experienced that day, felt like a gift in itself. That day, more than anything, showed me your unconditional love, your patience, and your unwavering support. It’s a memory I will carry in my heart forever, a day that made me feel truly seen, cherished, and loved by you.')">
           View That Day
         </button>
       </div>
@@ -263,17 +275,15 @@ Thank you for being the amazing person that you are, for making every day bright
 <section class="final">
   <div class="container">
     <h1>My Promise</h1>
-    <br> <br>
+    <br><br>
     <p>My Juji,
-<br> <br>   
+<br><br>   
 I want to make you some promises for our future, promises that come straight from my heart. I promise that I will always love you more with each passing day, to never take our love for granted, and to treasure every moment we share. I promise to stay by your side through the good times and the hard times, to support you, protect you, and be your safe place no matter what life throws at us.
-<br> <br>
-
-
+<br><br>
 I promise to grow with you, to be patient and understanding, and to never let my immaturity get in the way of what we have. I will listen, I will learn, and I will do my best to be the person you deserve. I promise to laugh with you, to comfort you, and to make sure you always feel loved, cherished, and valued.
-<br> <br>
+<br><br>
 No matter what the future holds, I will choose you, every single day. I will build our dreams with you, celebrate our victories, and hold your hand through every challenge. I promise to be your partner, your friend, your love, and your home. I love you more than words can ever express, and I promise to spend my life showing you just how much you mean to me.
-<br> <br>
+<br><br>
 Forever and always, <br>
 love Juwow
 ❤️</p>
@@ -321,4 +331,3 @@ function closeModal() {
 
 </body>
 </html>
-
