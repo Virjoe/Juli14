@@ -31,11 +31,12 @@ body {
 .heart {
   position: fixed;
   color: rgba(230,57,70,0.35);
-  animation: float 6s linear infinite;
+  animation: floatHeart 6s linear infinite;
 }
-@keyframes float {
-  from { transform: translateY(100vh); opacity: 1; }
-  to { transform: translateY(-10vh); opacity: 0; }
+@keyframes floatHeart {
+  0% { transform: translateY(100vh) scale(0.7); opacity: 0; }
+  30% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
 }
 
 /* SECTIONS */
@@ -52,7 +53,7 @@ section {
   max-width: 900px;
   opacity: 0;
   transform: translateY(50px);
-  transition: 1s ease;
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .container.show {
@@ -69,10 +70,11 @@ section {
   font-size: 60px;
   display: block;
   margin-bottom: 20px;
-  animation: pulse 1.5s infinite;
+  animation: heroPulse 2s ease-in-out infinite;
 }
-@keyframes pulse {
-  50% { transform: scale(1.15); }
+@keyframes heroPulse {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
 }
 
 /* CORE MEMORIES */
@@ -92,13 +94,13 @@ section {
   border-radius: 25px;
   box-shadow: 0 15px 35px rgba(0,0,0,0.12);
   opacity: 0;
-  transform: translateY(50px);
-  transition: 1s ease;
+  transform: translateY(50px) rotateX(15deg);
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .card.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) rotateX(0deg);
 }
 
 /* IMAGE */
@@ -107,8 +109,8 @@ section {
   border-radius: 18px;
   margin-bottom: 15px;
   opacity: 0;
-  transform: scale(0.95);
-  transition: 1s ease;
+  transform: scale(0.9);
+  transition: transform 1s ease, opacity 1s ease;
 }
 
 .card.show img {
@@ -126,16 +128,12 @@ section {
   color: white;
   font-size: 16px;
   cursor: pointer;
-  animation: glow 2s infinite;
-  transition: transform .3s;
+  transition: transform .3s, box-shadow .3s;
 }
 
 .view-btn:hover {
   transform: scale(1.08);
-}
-
-@keyframes glow {
-  50% { box-shadow: 0 0 18px rgba(255,77,109,0.7); }
+  box-shadow: 0 0 15px rgba(255,77,109,0.6);
 }
 
 /* MODAL */
@@ -154,26 +152,30 @@ section {
   background: #fff;
   padding: 30px;
   width: 100%;
-  max-width: 500px;       /* fixed width */
-  max-height: 80vh;       /* fixed max height */
+  max-width: 500px;
+  max-height: 80vh;
   border-radius: 20px;
   text-align: center;
-  overflow-y: auto;       /* scroll inside box */
+  overflow-y: auto;
   word-wrap: break-word;
   flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.modal-content.show {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .modal-content::-webkit-scrollbar {
   width: 8px;
 }
+
 .modal-content::-webkit-scrollbar-thumb {
   background: rgba(230,57,70,0.5);
   border-radius: 4px;
-}
-
-@keyframes pop {
-  from { transform: scale(0.85); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
 }
 
 .close {
@@ -222,7 +224,7 @@ section {
     <span>❤️</span>
     <h1>Juliana</h1>
     <p>Hello, baby! ❤️
-
+<br><br>
 Happy Valentine’s Day and happy 9th month anniversary! I made this digital love letter just for you, and I hope it brings a smile to your face. I know it’s not much, but every word, every detail comes straight from my heart. I want you to know how much I truly love you, you mean the world to me, and I love you so deeply, so badly, more than I can ever express in words.
 <br><br>
 I wish you nothing but the best, always. I wish for your happiness, your dreams to come true, and for every day to bring you joy and laughter. I hope that I can be there to support you, to make you smile, and to share every beautiful moment of life with you.
@@ -320,12 +322,32 @@ window.addEventListener('scroll', () => {
   });
 });
 
-/* MODAL */
+/* MODAL WITH TYPING EFFECT */
+let typingInterval;
+
 function openModal(text) {
-  document.getElementById('modalText').innerText = text;
-  document.getElementById('modal').style.display = 'flex';
+  const modal = document.getElementById('modal');
+  const modalText = document.getElementById('modalText');
+  modal.style.display = 'flex';
+  modalText.classList.remove('show');
+  modalText.innerHTML = '';
+  
+  let i = 0;
+  clearInterval(typingInterval);
+  modalText.classList.add('show');
+  typingInterval = setInterval(() => {
+    if (i < text.length) {
+      modalText.innerHTML += text.charAt(i);
+      i++;
+      modalText.scrollTop = modalText.scrollHeight; // auto-scroll
+    } else {
+      clearInterval(typingInterval);
+    }
+  }, 20); // typing speed in ms
 }
+
 function closeModal() {
+  clearInterval(typingInterval);
   document.getElementById('modal').style.display = 'none';
 }
 </script>
