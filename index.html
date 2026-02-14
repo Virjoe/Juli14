@@ -34,6 +34,7 @@ body {
   position: fixed;
   color: rgba(230,57,70,0.35);
   animation: floatHeart 6s linear infinite;
+  pointer-events: none;
 }
 @keyframes floatHeart {
   0% { transform: translateY(100vh) scale(0.7); opacity: 0; }
@@ -158,11 +159,14 @@ section {
   max-height: 80vh;
   border-radius: 20px;
   text-align: center;
-  overflow-y: auto;
-  word-wrap: break-word;
-  flex-shrink: 0;
 
-  /* FIXED ANIMATION (NO SCALE = NO ZOOM BUG) */
+  /* FIXES FOR ZOOM BUG */
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  font-size: 16px;
+
   opacity: 0;
   transform: translateY(20px);
   transition: transform 0.4s ease, opacity 0.4s ease;
@@ -228,7 +232,11 @@ section {
     <span>❤️</span>
     <h1>Juliana</h1>
     <p>Hello, baby! ❤️<br><br>
-    Happy Valentine’s Day and happy 9th month anniversary! I made this digital love letter just for you...</p>
+Happy Valentine’s Day and happy 9th month anniversary! I made this digital love letter just for you, and I hope it brings a smile to your face. I know it’s not much, but every word, every detail comes straight from my heart. I want you to know how much I truly love you, you mean the world to me, and I love you so deeply, so badly, more than I can ever express in words.
+<br><br>
+I wish you nothing but the best, always. I wish for your happiness, your dreams to come true, and for every day to bring you joy and laughter. I hope that I can be there to support you, to make you smile, and to share every beautiful moment of life with you.
+<br><br>
+Thank you for being the amazing person that you are, for making every day brighter, and for filling my heart with so much love. I love you endlessly, baby, and I can’t wait to make even more memories with you. You’re my everything, and I promise to cherish you, adore you, and love you more with every single day we spend together. 💖</p>
   </div>
 </section>
 
@@ -241,7 +249,7 @@ section {
       <div class="card">
         <img src="0.jpeg">
         <p>First Date</p>
-        <button class="view-btn" onclick="openModal('Our first date is a memory I will always treasure...')">
+        <button class="view-btn" onclick="openModal(`Our first date is a memory I will always treasure. We watched the Minecraft movie, and I couldn’t help but feel shy because you looked even more gorgeous in person. We laughed, we watched, and I cherished every moment by your side. After the movie, we walked to the park and talked about everything and nothing, just enjoying being together. On the way home, I thought I heard you say you wanted to kiss me but I had misunderstood. Still, I kissed you, and you welcomed it with that beautiful smile. That day will forever be etched in my heart, because it’s the day I fell for you even more deeply.`)">
           View That Day
         </button>
       </div>
@@ -249,7 +257,7 @@ section {
       <div class="card">
         <img src="1..jpeg">
         <p>Laughing together.</p>
-        <button class="view-btn" onclick="openModal('This is our first photo together, taken at Baywalk...')">
+        <button class="view-btn" onclick="openModal(`This is our first photo together, taken at Baywalk. We shared pizza and watched the sunset, savoring every moment. We went home late, soaked in the rain, because we didn’t want to be apart. That day, simple as it was, will always be one of my favorite memories with you.`)">
           View That Day
         </button>
       </div>
@@ -257,7 +265,7 @@ section {
       <div class="card">
         <img src="2.jpeg">
         <p>Comfort.</p>
-        <button class="view-btn" onclick="openModal('This is the cutest photo we ever took together...')">
+        <button class="view-btn" onclick="openModal(`This is the cutest photo we ever took together, at the mall. We were goofing around and having so much fun. Afterward, we took some cute photos, but this one still stands out to me even today. It was such a joyful day, and I loved every moment of it because I got to see your beautiful smile the whole time.`)">
           View That Day
         </button>
       </div>
@@ -265,7 +273,7 @@ section {
       <div class="card">
         <img src="3.jpeg">
         <p>Moments that stay.</p>
-        <button class="view-btn" onclick="openModal('This photo was taken on my birthday...')">
+        <button class="view-btn" onclick="openModal(`This photo was taken on my birthday, a day I honestly didn’t feel very happy. I was carrying so much sadness, but the moment I was with you, all of it seemed to melt away. You comforted me in ways only you could; you held me close, hugged me tightly, and made me feel safe and loved. I was so thankful that you chose to celebrate my birthday with me, even when I didn’t feel like celebrating at all. The little mini cakes you brought were not just delicious, they were a reminder of the thought and care you put into every detail. Every laugh we shared, every small moment we experienced that day, felt like a gift in itself. That day, more than anything, showed me your unconditional love, your patience, and your unwavering support. It’s a memory I will carry in my heart forever, a day that made me feel truly seen, cherished, and loved by you.`)">
           View That Day
         </button>
       </div>
@@ -319,6 +327,7 @@ function openModal(text) {
   modal.style.display = 'flex';
   modalText.classList.remove('show');
   modalText.innerHTML = '';
+  modalText.scrollTop = 0;
 
   let i = 0;
   clearInterval(typingInterval);
